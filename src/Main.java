@@ -3,9 +3,15 @@ import java.util.concurrent.*;
 public class Main {
 
     public static void main(String[] args) {
-        int numThreads = 256;
-        long dartsPerThread = 10000000;
-        boolean isUniform = false;
+        boolean isUniform = false; // Set to true for uniform sampling, false for stratified sampling
+        int numThreads = 200;
+        long dartsPerThread = 100000;
+
+        if (args.length >= 3) {
+            isUniform = Boolean.parseBoolean(args[0]);
+            numThreads = Integer.parseInt(args[1]);
+            dartsPerThread = Long.parseLong(args[2]);
+        }
 
         DartBoard dartBoard = buildDartBoard(numThreads, isUniform);
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);

@@ -19,12 +19,16 @@ To run the program:
     javac Main.java
     ```
 
-5. Run the compiled program using:
+5. Run the compiled program with:
 
     ```
-    java Main
+    java Main true 200 100000
     ```
-
+   You can use these optional flags (in order):
+   1. for sampling type:
+      1. true = Uniform Sampling, false = Statified Sampling
+   2. Number of Threads 
+   3. Darts per Thread
 ## Contributing
 
 Contributions to this project are welcome! If you have any ideas for improvements, new features, or bug fixes, please feel free to open an issue or create a pull request.
