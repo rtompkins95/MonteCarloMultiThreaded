@@ -22,11 +22,11 @@ To run the program:
 5. Run the compiled program with:
 
     ```
-    java Main true 200 100000
+    java Main uniform 200 100000
     ```
-   You can use these optional flags (in order):
-   1. for sampling type:
-      1. true = Uniform Sampling, false = Statified Sampling
+   You can use these optional flags:
+   1. Sampling type:
+      1. uniform = Uniform Sampling, stratified = Statified Sampling
    2. Number of Threads 
    3. Darts per Thread
 ## Contributing
