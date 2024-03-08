@@ -13,20 +13,7 @@ public class Main {
             dartsPerThread = Long.parseLong(args[2]);
         }
 
-        if (!samplingIsValid(samplingMethod)) {
-            System.err.printf("Invalid Sampling Method: %s\n", samplingMethod);
-            System.exit(-1);
-        }
-
-        if (numThreads < 1) {
-            System.err.printf("At least one thread required for execution\n", samplingMethod);
-            System.exit(-1);
-        }
-
-        if (dartsPerThread < 0) {
-            System.err.printf("Number of darts cannot be negative\n", samplingMethod);
-            System.exit(-1);
-        }
+        validateArgs(samplingMethod, numThreads, dartsPerThread);
 
         DartBoard dartBoard = buildDartBoard(numThreads, samplingMethod);
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
@@ -58,5 +45,22 @@ public class Main {
 
     private static boolean samplingIsValid(String samplingMethod) {
         return Constants.VALID_SAMPLING_METHODS.contains(samplingMethod);
+    }
+
+    private static void validateArgs(String samplingMethod, int numThreads, long dartsPerThread) {
+        if (!samplingIsValid(samplingMethod)) {
+            System.err.printf("Invalid Sampling Method: %s\n", samplingMethod);
+            System.exit(-1);
+        }
+
+        if (numThreads < 1) {
+            System.err.printf("At least one thread required for execution\n", numThreads);
+            System.exit(-1);
+        }
+
+        if (dartsPerThread < 0) {
+            System.err.printf("Number of darts cannot be negative\n", dartsPerThread);
+            System.exit(-1);
+        }
     }
 }
