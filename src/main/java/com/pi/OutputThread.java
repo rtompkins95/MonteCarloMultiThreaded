@@ -1,3 +1,4 @@
+package com.pi;
 class OutputThread extends Thread {
     private final DartBoardUniformSampling dartBoard;
 

@@ -1,3 +1,5 @@
+package com.pi;
+
 public interface DartBoard {
     /**
      * Adds the number of darts thrown and the number of hits to the board.
@@ -25,4 +27,8 @@ public interface DartBoard {
      * @return the value of pi
      */
     double calculatePi();
+
+    long getTotalThrow();
+
+    long getTotalHits();
 }

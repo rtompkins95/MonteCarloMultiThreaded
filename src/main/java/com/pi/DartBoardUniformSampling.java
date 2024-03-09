@@ -1,3 +1,5 @@
+package com.pi;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -32,5 +34,13 @@ class DartBoardUniformSampling implements DartBoard {
         System.out.printf("Num Hit: %d%n", numHits.get());
         System.out.printf("Pi: %1.10f%n", pi);
         return pi;
+    }
+
+    public long getTotalThrow() {
+        return this.numThrown.get();
+    }
+
+    public long getTotalHits() {
+        return this.numHits.get();
     }
 }

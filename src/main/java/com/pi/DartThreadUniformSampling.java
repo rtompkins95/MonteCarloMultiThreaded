@@ -1,3 +1,5 @@
+package com.pi;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 class DartThreadUniformSampling implements DartThread {
