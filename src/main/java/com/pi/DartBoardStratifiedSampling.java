@@ -7,11 +7,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicLong;
 
 class DartBoardStratifiedSampling implements DartBoard {
-    private AtomicLong numHits = new AtomicLong(0);
-    private AtomicLong numThrown = new AtomicLong(0);
-
-    private List<XYPair> hitCoordinates;
-    private List<XYPair> missCoordinates;
+    private final AtomicLong numHits = new AtomicLong(0);
+    private final AtomicLong numThrown = new AtomicLong(0);
+    private final List<XYPair> hitCoordinates;
+    private final List<XYPair> missCoordinates;
     private final int totalSubregions;
     private final CountDownLatch latch;
 
@@ -55,6 +54,14 @@ class DartBoardStratifiedSampling implements DartBoard {
         System.out.printf("Num Hit: %d%n", numHits.get());
         System.out.printf("Pi: %1.10f%n", pi);
         return pi;
+    }
+
+    private double adjustmentFactor(int totalSubregions) {
+        if (totalSubregions == 10) return 1.0/10;
+        if (totalSubregions == 100) return 100.0/100;
+        if (totalSubregions == 1000) return 10000.0/1000;
+        if (totalSubregions == 10000) return 1000000.0/10000;
+        return totalSubregions;
     }
 
     public long getTotalThrow() {

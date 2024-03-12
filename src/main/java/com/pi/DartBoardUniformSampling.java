@@ -7,10 +7,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicLong;
 
 class DartBoardUniformSampling implements DartBoard {
-    private AtomicLong numHits = new AtomicLong(0);
-    private AtomicLong numThrown = new AtomicLong(0);
-    private List<XYPair> hitCoordinates;
-    private List<XYPair> missCoordinates;
+    private final AtomicLong numHits = new AtomicLong(0);
+    private final AtomicLong numThrown = new AtomicLong(0);
+    private final List<XYPair> hitCoordinates;
+    private final List<XYPair> missCoordinates;
     private final CountDownLatch latch;
 
     public DartBoardUniformSampling(int numThreads) {

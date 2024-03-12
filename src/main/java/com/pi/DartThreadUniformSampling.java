@@ -8,9 +8,8 @@ import java.util.concurrent.ThreadLocalRandom;
 class DartThreadUniformSampling implements DartThread {
     private final DartBoard dartBoard;
     private final long numDarts;
-
-    private List<XYPair> hitCoordinates;
-    private List<XYPair> missCoordinates;
+    private final List<XYPair> hitCoordinates;
+    private final List<XYPair> missCoordinates;
 
     public DartThreadUniformSampling(DartBoard dartBoard, long numDarts) {
         this.dartBoard = dartBoard;

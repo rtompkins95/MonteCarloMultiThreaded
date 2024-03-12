@@ -9,9 +9,8 @@ class DartThreadStratifiedSampling implements DartThread {
     private final DartBoard dartBoard;
     private final long numDarts;
     private final int totalSubregions;
-
-    private List<XYPair> hitCoordinates;
-    private List<XYPair> missCoordinates;
+    private final List<XYPair> hitCoordinates;
+    private final List<XYPair> missCoordinates;
 
     public DartThreadStratifiedSampling(DartBoard dartBoard, long numDarts, int numSubregions) {
         this.dartBoard = dartBoard;
@@ -47,7 +46,7 @@ class DartThreadStratifiedSampling implements DartThread {
                                        int subregionX,
                                        int subregionY) {
         long numHits = 0;
-        double subregionWidth = 0.1; // Width of each subregion
+        double subregionWidth = 1.0 / totalSubregions; // Width of each subregion
         double xOffset = subregionX * subregionWidth;
         double yOffset = subregionY * subregionWidth;
 
@@ -55,8 +54,9 @@ class DartThreadStratifiedSampling implements DartThread {
             // Generate random points within the subregion
             double x = random.nextDouble(xOffset, xOffset + subregionWidth);
             double y = random.nextDouble(yOffset, yOffset + subregionWidth);
+
             // Check if the point falls within the circle
-            if ((Math.sqrt((x * x) + (y * y)) <= 1)) {
+            if (Math.sqrt((x * x) + (y * y)) <= 1) {
                 numHits++;
                 this.hitCoordinates.add(new XYPair(x, y));
             } else {

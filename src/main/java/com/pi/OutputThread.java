@@ -11,9 +11,10 @@ class OutputThread extends Thread {
             while (!dartBoard.isFinished()) {
                 Thread.sleep(100); // Sleep for a short time to avoid busy waiting
             }
+
             dartBoard.calculatePi();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         }
     }
 }

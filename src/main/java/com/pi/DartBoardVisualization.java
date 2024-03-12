@@ -57,6 +57,7 @@ public class DartBoardVisualization extends JFrame {
     }
 
     private XYSeriesCollection getSeriesCollection() {
+        System.out.println("Aggregating X-Y Coordinates");
         XYSeries hitSeries = new XYSeries("Hits");
         for (XYPair pair: hits) {
             hitSeries.add(pair.x, pair.y);
@@ -90,5 +91,12 @@ public class DartBoardVisualization extends JFrame {
         dataset.addSeries(circleSeries);
         dataset.addSeries(squareSeries); // Add the square series to the dataset
         return dataset;
+    }
+
+    public void render() {
+        System.out.println("Rendering graph...");
+        this.pack();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 }
