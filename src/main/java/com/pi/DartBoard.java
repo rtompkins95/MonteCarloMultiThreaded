@@ -1,5 +1,7 @@
 package com.pi;
 
+import java.util.List;
+
 public interface DartBoard {
     /**
      * Adds the number of darts thrown and the number of hits to the board.
@@ -31,4 +33,12 @@ public interface DartBoard {
     long getTotalThrow();
 
     long getTotalHits();
+
+    void addHitCoordinates(List<XYPair> hitCoordinates);
+
+    void addMissCoordinates(List<XYPair> missCoordinates);
+
+    List<XYPair> getHitCoordinates();
+
+    List<XYPair> getMissCoordinates();
 }

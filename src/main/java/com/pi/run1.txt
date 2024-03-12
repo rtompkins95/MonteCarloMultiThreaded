@@ -1,0 +1,4 @@
+Num Subregions: 10
+Num Thrown: 50000
+Num Hit: 392692
+Pi: 3.1415360000

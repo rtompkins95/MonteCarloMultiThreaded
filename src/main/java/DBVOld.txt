@@ -1,0 +1,73 @@
+package com.pi;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class DartBoardVisualization extends JFrame {
+    private final long hits;
+    private final long misses;
+
+    public DartBoardVisualization(long hits, long misses) {
+        super("Dartboard Visualization");
+        this.hits = hits;
+        this.misses = misses;
+
+        initUI();
+
+        System.out.println("UI INIT");
+    }
+
+    private void initUI() {
+        XYSeries hitSeries = new XYSeries("Hits");
+        for (int i = 0; i < hits; i++) {
+            double x = Math.random(); // Random x coordinate within [0, 1)
+            double y = Math.random(); // Random y coordinate within [0, 1)
+            hitSeries.add(x, y);
+        }
+
+        XYSeries missSeries = new XYSeries("Misses");
+        for (int i = 0; i < misses; i++) {
+            double x = Math.random(); // Random x coordinate within [0, 1)
+            double y = Math.random(); // Random y coordinate within [0, 1)
+            missSeries.add(x, y);
+        }
+
+        // Create series for the circle
+        XYSeries circleSeries = new XYSeries("Circle");
+        for (double theta = 0; theta <= 2 * Math.PI; theta += 0.01) {
+            double x = 0.5 + 0.5 * Math.cos(theta); // Circle's x coordinate
+            double y = 0.5 + 0.5 * Math.sin(theta); // Circle's y coordinate
+            circleSeries.add(x, y);
+        }
+
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(hitSeries);
+        dataset.addSeries(missSeries);
+        dataset.addSeries(circleSeries); // Add the circle series to the dataset
+
+        JFreeChart chart = ChartFactory.createScatterPlot(
+                "Dartboard Hits and Misses",
+                "X",
+                "Y",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+        );
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(800, 600));
+
+        setContentPane(chartPanel);
+        pack();
+        setLocationRelativeTo(null); // Center the window
+    }
+}

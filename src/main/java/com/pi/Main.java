@@ -1,11 +1,12 @@
 package com.pi;
 
+import javax.swing.*;
 import java.util.concurrent.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        String samplingMethod = Constants.UNIFORM_SAMPLING;
+        String samplingMethod = Constants.DEFAULT_SAMPLING;
         int numThreads = Constants.DEFAULT_THREAD_COUNT;
         long dartsPerThread = Constants.DEFAULT_DARTS_PER_THREAD;
 
@@ -27,8 +28,13 @@ public class Main {
         }
 
         CompletableFuture<Void> allOf = CompletableFuture.allOf(futures);
-        allOf.thenRun(dartBoard::calculatePi)
-                .join();
+        allOf.thenRun(dartBoard::calculatePi).join();
+
+        DartBoardVisualization dartBoardVisualization = new DartBoardVisualization(dartBoard.getHitCoordinates(), dartBoard.getMissCoordinates());
+
+        dartBoardVisualization.pack();
+        dartBoardVisualization.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        dartBoardVisualization.setVisible(true);
 
         executor.shutdown();
     }

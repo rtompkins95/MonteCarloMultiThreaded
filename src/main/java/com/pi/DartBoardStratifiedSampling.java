@@ -1,17 +1,25 @@
 package com.pi;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicLong;
 
 class DartBoardStratifiedSampling implements DartBoard {
     private AtomicLong numHits = new AtomicLong(0);
     private AtomicLong numThrown = new AtomicLong(0);
+
+    private List<XYPair> hitCoordinates;
+    private List<XYPair> missCoordinates;
     private final int totalSubregions;
     private final CountDownLatch latch;
 
     public DartBoardStratifiedSampling(int numThreads, int totalSubregions) {
         this.latch = new CountDownLatch(numThreads);
         this.totalSubregions = totalSubregions;
+        this.hitCoordinates = Collections.synchronizedList(new ArrayList<>());
+        this.missCoordinates = Collections.synchronizedList(new ArrayList<>());
     }
 
     public void addThrows(long numThrown, long numHits) {
@@ -55,5 +63,21 @@ class DartBoardStratifiedSampling implements DartBoard {
 
     public long getTotalHits() {
         return this.numHits.get();
+    }
+
+    public void addHitCoordinates(List<XYPair> hitCoordinates) {
+        this.hitCoordinates.addAll(hitCoordinates);
+    }
+
+    public void addMissCoordinates(List<XYPair> missCoordinates) {
+        this.missCoordinates.addAll(missCoordinates);
+    }
+
+    public List<XYPair> getHitCoordinates() {
+        return this.hitCoordinates;
+    }
+
+    public List<XYPair> getMissCoordinates() {
+        return this.missCoordinates;
     }
 }
