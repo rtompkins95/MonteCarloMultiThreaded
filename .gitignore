@@ -2,4 +2,6 @@
 *out
 *.idea
 *.class
+target/*
 .DS_Store
+*.xml
