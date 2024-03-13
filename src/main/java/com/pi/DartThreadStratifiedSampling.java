@@ -21,7 +21,7 @@ class DartThreadStratifiedSampling implements DartThread {
     }
 
     public DartThreadStratifiedSampling(DartBoard dartBoard, long numDarts) {
-        this(dartBoard, numDarts, Constants.DEFAULT_TOTAL_SUBREGIONS);
+        this(dartBoard, numDarts, Config.DEFAULT_TOTAL_SUBREGIONS);
     }
 
     public void run() {

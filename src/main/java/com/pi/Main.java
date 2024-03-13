@@ -1,17 +1,14 @@
 package com.pi;
 
-import javax.swing.*;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.concurrent.*;
 
 public class Main {
 
-    public static String samplingMethod = Constants.DEFAULT_SAMPLING;
-    public static int numThreads = Constants.DEFAULT_THREAD_COUNT;
-    public static long dartsPerThread = Constants.DEFAULT_DARTS_PER_THREAD;
-    public static int totalSubregions = Constants.DEFAULT_TOTAL_SUBREGIONS; // for Stratified sampling
-    public static boolean showChart = Constants.DISPLAY_CHART; // for Stratified sampling
+    public static String samplingMethod = Config.DEFAULT_SAMPLING;
+    public static int numThreads = Config.DEFAULT_THREAD_COUNT;
+    public static long dartsPerThread = Config.DEFAULT_DARTS_PER_THREAD;
+    public static int totalSubregions = Config.DEFAULT_TOTAL_SUBREGIONS; // for Stratified sampling
+    public static boolean showChart = Config.DISPLAY_CHART; // for Stratified sampling
 
     public static void main(String[] args) {
 
@@ -38,19 +35,19 @@ public class Main {
     }
 
     public static DartBoard buildDartBoard() {
-        return samplingMethod.equals(Constants.UNIFORM_SAMPLING) ?
+        return samplingMethod.equals(Config.UNIFORM_SAMPLING) ?
                 new DartBoardUniformSampling(numThreads):
                 new DartBoardStratifiedSampling(numThreads, totalSubregions);
     }
 
     public static DartThread buildDartThread(DartBoard dartBoard) {
-        return samplingMethod.equals(Constants.UNIFORM_SAMPLING) ?
+        return samplingMethod.equals(Config.UNIFORM_SAMPLING) ?
                 new DartThreadUniformSampling(dartBoard, dartsPerThread):
                 new DartThreadStratifiedSampling(dartBoard, dartsPerThread, totalSubregions);
     }
 
     private static boolean samplingIsValid(String samplingMethod) {
-        return Constants.VALID_SAMPLING_METHODS.contains(samplingMethod.toUpperCase());
+        return Config.VALID_SAMPLING_METHODS.contains(samplingMethod.toUpperCase());
     }
 
     private static void validateArgs(String[] args) {
